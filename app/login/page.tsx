@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, Lock, User, LogIn, Sparkles } from 'lucide-react';
+import { Mail, Lock, User, LogIn, Sparkles, BookOpen } from 'lucide-react';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const [isRegister, setIsRegister] = useState(false);
@@ -16,7 +17,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ maxWidth: 450, margin: '60px auto', padding: '0 20px' }}>
+    <div style={{ maxWidth: 450, margin: '50px auto', padding: '0 20px' }}>
       <div className="card" style={{ textAlign: 'center' }}>
         <div style={{ marginBottom: 20 }}>
           <h1 style={{ fontSize: 24, fontWeight: 700, color: '#1877F2' }}>
@@ -118,15 +119,18 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p style={{ marginTop: 20, fontSize: 14, color: '#65676B' }}>
-          {isRegister ? 'Already have an account?' : "Don't have an account?"}{' '}
+        <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid #E4E6EB', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 13 }}>
+          <Link href="/docs" style={{ color: '#1877F2', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
+            <BookOpen size={14} /> Read Documentation
+          </Link>
+          
           <button 
             onClick={() => setIsRegister(!isRegister)} 
             style={{ background: 'none', border: 'none', color: '#1877F2', fontWeight: 600, cursor: 'pointer' }}
           >
             {isRegister ? 'Log In' : 'Sign Up'}
           </button>
-        </p>
+        </div>
       </div>
     </div>
   );
