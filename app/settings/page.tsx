@@ -20,7 +20,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div style={{ maxWidth: 850, margin: '30px auto', padding: '0 20px' }}>
+    <div style={{ width: '100%', maxWidth: '100%', margin: 0, padding: '20px 24px' }}>
       <div className="card">
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <Key size={24} color="#1877F2" />

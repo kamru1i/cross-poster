@@ -35,7 +35,7 @@ export default function LiveStudioPage() {
   };
 
   return (
-    <div style={{ maxWidth: 1000, margin: '30px auto', padding: '0 20px' }}>
+    <div style={{ width: '100%', maxWidth: '100%', margin: 0, padding: '20px 24px' }}>
       <div className="card" style={{ marginBottom: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -99,7 +99,7 @@ export default function LiveStudioPage() {
 
           {/* Video Preview Box */}
           <div style={{ 
-            height: 360, 
+            height: 420, 
             backgroundColor: '#050505', 
             borderRadius: 12, 
             display: 'flex', 
@@ -110,12 +110,12 @@ export default function LiveStudioPage() {
             position: 'relative',
             marginTop: 10
           }}>
-            <Video size={48} color={isStreaming ? '#FF0000' : '#65676B'} />
+            <Video size={54} color={isStreaming ? '#FF0000' : '#65676B'} />
             <p style={{ marginTop: 12, fontSize: 15, color: isStreaming ? '#FFFFFF' : '#65676B' }}>
               {isStreaming ? `Broadcasting live to ${selectedPlatforms.length} destinations...` : 'Camera Preview / WebRTC Encoder Ready'}
             </p>
 
-            <div style={{ position: 'absolute', bottom: 20 }}>
+            <div style={{ position: 'absolute', bottom: 24 }}>
               <button 
                 className={isStreaming ? 'btn btn-secondary' : 'btn btn-live'}
                 onClick={handleToggleStream}
