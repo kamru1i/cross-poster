@@ -17,13 +17,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ maxWidth: 450, margin: '50px auto', padding: '0 20px' }}>
-      <div className="card" style={{ textAlign: 'center' }}>
-        <div style={{ marginBottom: 20 }}>
+    <div style={{
+      minHeight: 'calc(100vh - 60px)',
+      width: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '24px 20px'
+    }}>
+      <div className="card" style={{ width: '100%', maxWidth: '450px', textAlign: 'center', padding: '32px 28px' }}>
+        <div style={{ marginBottom: 24 }}>
           <h1 style={{ fontSize: 24, fontWeight: 700, color: '#1877F2' }}>
             {isRegister ? 'Join Cross Poster' : 'Welcome to Cross Poster'}
           </h1>
-          <p style={{ color: '#65676B', fontSize: 14 }}>
+          <p style={{ color: '#65676B', fontSize: 14, marginTop: 4 }}>
             Sign in to manage your cross-posting & live streaming
           </p>
         </div>
@@ -119,7 +126,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid #E4E6EB', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 13 }}>
+        <div style={{ marginTop: 24, paddingTop: 16, borderTop: '1px solid #E4E6EB', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 13 }}>
           <Link href="/docs" style={{ color: '#1877F2', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
             <BookOpen size={14} /> Read Documentation
           </Link>
