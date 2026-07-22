@@ -1,6 +1,7 @@
 import './globals.css';
 import React from 'react';
 import Navbar from '@/components/Navbar';
+import Sidebar from '@/components/Sidebar';
 
 export const metadata = {
   title: 'Cross Poster | Social Cross-Posting & Live Streamer',
@@ -14,9 +15,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body style={{ backgroundColor: '#F0F2F5', minHeight: '100vh', margin: 0 }}>
         <Navbar />
-        <main>{children}</main>
+        <div style={{ display: 'flex', minHeight: 'calc(100vh - 60px)', width: '100%' }}>
+          <Sidebar />
+          <main style={{ flex: 1, minWidth: 0 }}>
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );
