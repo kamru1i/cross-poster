@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Globe, Video, Settings, UserCheck, Share2, BookOpen, LogOut } from 'lucide-react';
+import { Globe, Video, Settings, UserCheck, Share2, BookOpen, LogOut, User } from 'lucide-react';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -21,13 +21,13 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     setIsLoggedIn(false);
-    window.location.href = '/login';
+    window.location.href = '/';
   };
 
   return (
     <nav className="navbar">
       {/* Left: Brand Logo */}
-      <Link href={isLoggedIn ? '/' : '/login'} className="brand-title">
+      <Link href={isLoggedIn ? '/' : '/'} className="brand-title">
         <Share2 size={24} color="#1877F2" />
         <span>Cross Poster</span>
       </Link>
@@ -46,6 +46,10 @@ export default function Navbar() {
           <Link href="/settings" className={`nav-item ${pathname === '/settings' ? 'active' : ''}`}>
             <Settings size={16} style={{ marginRight: 6, display: 'inline' }} />
             BYOK Settings
+          </Link>
+          <Link href="/account-settings" className={`nav-item ${pathname === '/account-settings' ? 'active' : ''}`}>
+            <User size={16} style={{ marginRight: 6, display: 'inline' }} />
+            Account & Security
           </Link>
         </div>
       ) : (
@@ -74,7 +78,7 @@ export default function Navbar() {
           </button>
         ) : (
           !isLoginPage && (
-            <Link href="/login" className="btn btn-primary" style={{ padding: '6px 16px', fontSize: 13 }}>
+            <Link href="/" className="btn btn-primary" style={{ padding: '6px 16px', fontSize: 13 }}>
               <UserCheck size={16} />
               Login
             </Link>
