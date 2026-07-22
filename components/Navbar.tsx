@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Globe, Video, Settings, Share2, BookOpen, User } from 'lucide-react';
+import { Globe, Video, Settings, Share2, BookOpen } from 'lucide-react';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -29,10 +29,6 @@ export default function Navbar() {
         <Link href="/settings" className={`nav-item ${pathname === '/settings' ? 'active' : ''}`}>
           <Settings size={16} style={{ marginRight: 6, display: 'inline' }} />
           BYOK Settings
-        </Link>
-        <Link href="/account-settings" className={`nav-item ${pathname === '/account-settings' ? 'active' : ''}`}>
-          <User size={16} style={{ marginRight: 6, display: 'inline' }} />
-          Account & Security
         </Link>
       </div>
 

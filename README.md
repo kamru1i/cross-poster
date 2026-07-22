@@ -1,7 +1,7 @@
 # Cross Poster
 
 > **Unified Multi-Platform Content Publishing & Simultaneous Live Streaming Studio**  
-> Built with Next.js 14, TypeScript, Tailwind/Vanilla CSS, and Prisma.
+> Built with Next.js 14, TypeScript, Vanilla CSS, and Prisma.
 
 ---
 
@@ -20,7 +20,6 @@ Since this application is built for personal/internal team use, all auth barrier
 - 📅 **Meta Business Suite Scheduling & Tagging**: Schedule future posts, select optimal AI recommended posting times, and manage hashtags/mentions.
 - 📊 **30-Day Reach & Performance Insights**: Real-time aggregated reach metrics (Total Reach, Impressions, Likes, Reactions, Comments).
 - 🔑 **Bring Your Own Key (BYOK) AES-256 Storage**: Securely input your Meta Developer App ID/Secret, Google OAuth credentials, and API keys directly from the UI.
-- ⚙️ **Account & Security Settings**: Update profile information, reset passwords, or manage account data.
 - 📚 **Interactive In-App Documentation**: Full-width fluid documentation hub with step-by-step setup guides (`/docs`).
 
 ---
