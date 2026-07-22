@@ -50,7 +50,7 @@ export default function LoginPage() {
               float: 'left'
             }}
           >
-            <ArrowLeft size={16} /> Back to all login options
+            <ArrowLeft size={16} /> Back
           </button>
         )}
 

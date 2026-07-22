@@ -54,7 +54,7 @@ export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
               float: 'left'
             }}
           >
-            <ArrowLeft size={16} /> Back to all login options
+            <ArrowLeft size={16} /> Back
           </button>
         )}
 
