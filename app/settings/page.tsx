@@ -144,7 +144,7 @@ export default function SettingsPage() {
             >
               {platformOptions.map(platform => (
                 <option key={platform.id} value={platform.id}>
-                  {savedPlatforms.includes(platform.id) ? '✓ ' : ''}{platform.name}
+                  {platform.name}
                 </option>
               ))}
             </select>
