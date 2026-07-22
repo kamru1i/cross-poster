@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, Facebook, BookOpen, ArrowLeft } from 'lucide-react';
+import { Mail, BookOpen, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 interface LoginFormProps {
@@ -70,7 +70,7 @@ export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
         {/* View 1: Choice Screen (Facebook, Google, Email) */}
         {authView === 'CHOICE' ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 10 }}>
-            {/* Facebook Button (White Background) */}
+            {/* Facebook Button with Official Round Blue 'f' Logo */}
             <button 
               className="btn" 
               style={{ 
@@ -88,7 +88,10 @@ export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
               }}
               onClick={handleSuccessfulAuth}
             >
-              <Facebook size={18} fill="#1877F2" color="#1877F2" />
+              <svg width="18" height="18" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="12" fill="#1877F2" />
+                <path fill="#FFFFFF" d="M15.12 12.72l.48-3.12h-3v-2.02c0-.85.42-1.68 1.75-1.68h1.36V3.25S14.47 3 13.29 3c-2.4 0-3.95 1.45-3.95 4.07v2.53H6.6v3.12h2.74V24h3.38V12.72h2.4z" />
+              </svg>
               <span>Facebook</span>
             </button>
 
