@@ -191,7 +191,7 @@ export default function PostStudioPage() {
         {/* Header Title */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
-            <h1 style={{ fontSize: 24, fontWeight: 700, color: '#1877F2' }}>Meta Suite Studio & Analytics</h1>
+            <h1 style={{ fontSize: 24, fontWeight: 700, color: '#1877F2' }}>cross-poster Studio & Analytics</h1>
             <p style={{ color: '#65676B', fontSize: 14 }}>Post, schedule, and track 30-day reach across all your connected social channels</p>
           </div>
           <a href="/live" className="btn btn-live">

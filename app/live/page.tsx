@@ -41,7 +41,7 @@ export default function LiveStudioPage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <Radio size={28} color="#FF0000" />
             <div>
-              <h1 style={{ fontSize: 22, fontWeight: 700, color: '#1877F2' }}>Multi-Platform Live Streaming Studio</h1>
+              <h1 style={{ fontSize: 22, fontWeight: 700, color: '#1877F2' }}>cross-poster Live Streaming Studio</h1>
               <p style={{ color: '#65676B', fontSize: 14 }}>Broadcast your live stream simultaneously across selected platforms</p>
             </div>
           </div>

@@ -25,7 +25,7 @@ export default function SettingsPage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <Key size={24} color="#1877F2" />
           <div>
-            <h1 style={{ fontSize: 22, fontWeight: 700, color: '#1877F2' }}>BYOK (Bring Your Own Keys) Settings</h1>
+            <h1 style={{ fontSize: 22, fontWeight: 700, color: '#1877F2' }}>cross-poster BYOK Settings</h1>
             <p style={{ color: '#65676B', fontSize: 14 }}>
               Enter your own official platform API credentials to ensure unlimited free API quota without rate limits.
             </p>

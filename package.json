@@ -1,5 +1,5 @@
 {
-  "name": "open-social-crossposter",
+  "name": "cross-poster",
   "version": "1.0.0",
   "description": "Open-Source Self-Hosted Multi-Tenant Social Media Cross-Posting Web App",
   "main": "server.js",
