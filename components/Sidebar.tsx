@@ -14,11 +14,15 @@ export default function Sidebar() {
       minWidth: '240px',
       backgroundColor: '#FFFFFF',
       borderRight: '1px solid #E4E6EB',
-      minHeight: 'calc(100vh - 60px)',
+      height: 'calc(100vh - 60px)',
+      position: 'sticky',
+      top: '60px',
       padding: '20px 14px',
       display: 'flex',
       flexDirection: 'column',
-      gap: 8
+      gap: 8,
+      boxSizing: 'border-box',
+      zIndex: 10
     }}>
       <div style={{ padding: '0 8px 12px 8px', fontSize: 12, fontWeight: 700, color: '#65676B', textTransform: 'uppercase', letterSpacing: 0.5 }}>
         Studio Navigation

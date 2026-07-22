@@ -15,11 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ backgroundColor: '#F0F2F5', minHeight: '100vh', margin: 0 }}>
+      <body style={{ backgroundColor: '#F0F2F5', minHeight: '100vh', margin: 0, overflow: 'hidden' }}>
         <Navbar />
-        <div style={{ display: 'flex', minHeight: 'calc(100vh - 60px)', width: '100%' }}>
+        <div style={{ display: 'flex', height: 'calc(100vh - 60px)', width: '100%', overflow: 'hidden' }}>
           <Sidebar />
-          <main style={{ flex: 1, minWidth: 0 }}>
+          <main style={{ flex: 1, minWidth: 0, height: 'calc(100vh - 60px)', overflowY: 'auto' }}>
             {children}
           </main>
         </div>
