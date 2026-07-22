@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Social Cross-Poster | Self-Hosted Multi-Account Social Media Publisher</title>
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+
+  <!-- TOP HEADER NAVBAR -->
+  <header class="app-header">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <i class="fa-solid fa-share-nodes"></i>
+      </div>
+      <div class="logo-text">
+        <span class="brand-title">CrossPoster<span class="brand-badge">PRO</span></span>
+        <span class="brand-sub">Self-Hosted Multi-Platform Engine</span>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <!-- BYOK Settings Button -->
+      <button id="btnOpenSettings" class="btn-secondary" title="BYOK API Credentials Settings">
+        <i class="fa-solid fa-key"></i> <span>API Keys (BYOK)</span>
+      </button>
+
+      <!-- Audit History Modal Button -->
+      <button id="btnOpenHistory" class="btn-secondary" title="View Published Post Audit Logs">
+        <i class="fa-solid fa-clock-rotate-left"></i> <span>Audit Log</span>
+      </button>
+
+      <!-- User Profile Dropdown -->
+      <div class="user-profile-menu">
+        <img id="userAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" alt="User Avatar" class="user-avatar">
+        <div class="user-info">
+          <span id="userName" class="user-name">Kamrul Hasan</span>
+          <span class="user-status"><i class="fa-solid fa-shield-halved"></i> Isolated Account</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="app-container">
+
+    <!-- LEFT SIDEBAR: ACCOUNTS MANAGER -->
+    <aside class="sidebar-accounts">
+      <div class="sidebar-header">
+        <h3><i class="fa-solid fa-users-gear"></i> Connected Accounts</h3>
+        <button id="btnAddAccount" class="btn-icon" title="Add New Account">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+
+      <!-- Platform Filter Tabs -->
+      <div class="platform-filter-pills">
+        <button class="filter-pill active" data-filter="ALL">All</button>
+        <button class="filter-pill" data-filter="META">Meta</button>
+        <button class="filter-pill" data-filter="YOUTUBE">YouTube</button>
+        <button class="filter-pill" data-filter="X">X / Threads</button>
+      </div>
+
+      <!-- Accounts List -->
+      <div id="accountsList" class="accounts-list">
+        <!-- Dynamic Accounts Rendered Here -->
+      </div>
+
+      <!-- Quick Stats Footer -->
+      <div class="sidebar-footer">
+        <div class="stat-box">
+          <span class="stat-num" id="statConnectedCount">6</span>
+          <span class="stat-label">Connected</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num" id="statSelectedCount">6</span>
+          <span class="stat-label">Targeted</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER WORKSPACE: UNIVERSAL POST COMPOSER -->
+    <section class="composer-workspace">
+      
+      <div class="workspace-header">
+        <h2><i class="fa-solid fa-paper-plane"></i> Universal Post Composer</h2>
+        <div class="selection-tools">
+          <button id="btnSelectAllAccounts" class="btn-text"><i class="fa-solid fa-check-double"></i> Select All</button>
+          <button id="btnDeselectAllAccounts" class="btn-text"><i class="fa-solid fa-xmark"></i> Deselect All</button>
+        </div>
+      </div>
+
+      <!-- Selected Target Account Badges -->
+      <div class="target-accounts-strip">
+        <span class="strip-title">Posting to:</span>
+        <div id="targetAccountChips" class="chips-container">
+          <!-- Dynamic Target Chips Rendered Here -->
+        </div>
+      </div>
+
+      <!-- Main Post Form -->
+      <div class="composer-card">
+
+        <!-- Text Area with Rich Controls -->
+        <div class="input-group">
+          <div class="textarea-header">
+            <label for="postContent"><i class="fa-solid fa-pen-to-square"></i> Post Content / Caption</label>
+            <div class="char-counters">
+              <span id="charCountGeneral" class="counter-badge">0 chars</span>
+              <span id="charCountX" class="counter-badge badge-warning" style="display:none;"><i class="fa-brands fa-x-twitter"></i> 280 max</span>
+            </div>
+          </div>
+          <textarea id="postContent" placeholder="Write your post content here once... It will be automatically published to all your selected Facebook IDs, Pages, Instagram, YouTube Channels, X & Threads accounts!" rows="6"></textarea>
+        </div>
+
+        <!-- Media Upload Dropzone -->
+        <div class="media-upload-section">
+          <div id="dropzone" class="dropzone-box">
+            <input type="file" id="mediaInput" multiple accept="image/*,video/*" class="file-input-hidden">
+            <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+            <div class="dropzone-text">
+              <span class="drop-primary">Click or Drag & Drop Images / Videos</span>
+              <span class="drop-secondary">Supports 4K Videos, Reels, YouTube Shorts & High-Res Images (No Size Limits)</span>
+            </div>
+          </div>
+
+          <!-- Upload Progress Bar -->
+          <div id="uploadProgress" class="progress-bar-container" style="display:none;">
+            <div class="progress-bar-fill" id="progressFill"></div>
+            <span id="progressText" class="progress-text">Uploading media... 0%</span>
+          </div>
+
+          <!-- Media Thumbnails Preview Grid -->
+          <div id="mediaPreviewGrid" class="media-preview-grid">
+            <!-- Uploaded thumbnails appear here -->
+          </div>
+        </div>
+
+        <!-- Platform Specific Customization Drawer (Accordion) -->
+        <div class="custom-accordion">
+          <button id="btnToggleCustomFields" class="accordion-trigger">
+            <span><i class="fa-solid fa-sliders"></i> Platform-Specific Fine-Tuning (Optional YouTube Title, Instagram Hashtags)</span>
+            <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+          </button>
+          
+          <div id="customFieldsPanel" class="accordion-content" style="display: none;">
+            <div class="custom-field-row">
+              <label for="ytTitle"><i class="fa-brands fa-youtube" style="color:#ff0000;"></i> YouTube Video / Shorts Title</label>
+              <input type="text" id="ytTitle" placeholder="Custom video title for YouTube upload...">
+            </div>
+            <div class="custom-field-row">
+              <label for="igHashtags"><i class="fa-brands fa-instagram" style="color:#e1306c;"></i> Instagram Extra Hashtags</label>
+              <input type="text" id="igHashtags" placeholder="#Tech #Coding #Reels #Viral">
+            </div>
+          </div>
+        </div>
+
+        <!-- Broadcast Actions Bar -->
+        <div class="composer-actions">
+          <div class="action-info">
+            <i class="fa-solid fa-shield-check"></i> Isolated BYOK Mode Active
+          </div>
+          <div class="action-buttons">
+            <button id="btnSchedulePost" class="btn-secondary">
+              <i class="fa-solid fa-calendar-days"></i> Schedule
+            </button>
+            <button id="btnPublishNow" class="btn-primary-glow">
+              <i class="fa-solid fa-bolt"></i> <span>Publish Everywhere Now</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- RIGHT SIDEBAR: REAL-TIME MULTI-PLATFORM PREVIEW -->
+    <aside class="sidebar-preview">
+      <div class="preview-header">
+        <h3><i class="fa-solid fa-eye"></i> Real-time Live Preview</h3>
+        <div class="preview-tabs">
+          <button class="prev-tab active" data-platform="FB"><i class="fa-brands fa-facebook"></i></button>
+          <button class="prev-tab" data-platform="IG"><i class="fa-brands fa-instagram"></i></button>
+          <button class="prev-tab" data-platform="YT"><i class="fa-brands fa-youtube"></i></button>
+          <button class="prev-tab" data-platform="X"><i class="fa-brands fa-x-twitter"></i></button>
+          <button class="prev-tab" data-platform="THREADS"><i class="fa-solid fa-at"></i></button>
+        </div>
+      </div>
+
+      <!-- Preview Mockup Shell -->
+      <div class="preview-card-shell">
+
+        <!-- Facebook Preview -->
+        <div id="previewFB" class="preview-mockup mockup-facebook">
+          <div class="mock-header">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=120&h=120&fit=crop" class="mock-avatar">
+            <div class="mock-meta">
+              <span class="mock-name">Tech & Coding BD Page</span>
+              <span class="mock-time">Just now · <i class="fa-solid fa-earth-americas"></i></span>
+            </div>
+          </div>
+          <div class="mock-body-text" id="fbBodyPreview">Post text will preview here in real-time...</div>
+          <div class="mock-media-container" id="fbMediaPreview"></div>
+          <div class="mock-footer-actions">
+            <span><i class="fa-regular fa-thumbs-up"></i> Like</span>
+            <span><i class="fa-regular fa-comment"></i> Comment</span>
+            <span><i class="fa-solid fa-share"></i> Share</span>
+          </div>
+        </div>
+
+        <!-- Instagram Preview -->
+        <div id="previewIG" class="preview-mockup mockup-instagram" style="display:none;">
+          <div class="mock-header">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&h=120&fit=crop" class="mock-avatar">
+            <span class="mock-name">kamrul_tech_creator</span>
+          </div>
+          <div class="mock-media-container" id="igMediaPreview"></div>
+          <div class="mock-footer-actions">
+            <i class="fa-regular fa-heart"></i>
+            <i class="fa-regular fa-comment"></i>
+            <i class="fa-regular fa-paper-plane"></i>
+          </div>
+          <div class="mock-body-text" id="igBodyPreview">
+            <strong>kamrul_tech_creator</strong> Post caption preview...
+          </div>
+        </div>
+
+        <!-- YouTube Shorts Preview -->
+        <div id="previewYT" class="preview-mockup mockup-youtube" style="display:none;">
+          <div class="mock-yt-player" id="ytMediaPreview">
+            <div class="yt-overlay">
+              <div class="yt-channel-badge">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&h=120&fit=crop" class="mock-avatar">
+                <span>Kamrul Tech Tutorials</span>
+              </div>
+              <div class="yt-title-preview" id="ytTitlePreview">Video Title Preview</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- X (Twitter) Preview -->
+        <div id="previewX" class="preview-mockup mockup-x" style="display:none;">
+          <div class="mock-header">
+            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=120&h=120&fit=crop" class="mock-avatar">
+            <div class="mock-meta">
+              <span class="mock-name">KamrulHasanDev</span>
+              <span class="mock-handle">@kamruldev_x</span>
+            </div>
+          </div>
+          <div class="mock-body-text" id="xBodyPreview">Tweet text preview...</div>
+          <div class="mock-media-container" id="xMediaPreview"></div>
+        </div>
+
+        <!-- Threads Preview -->
+        <div id="previewTHREADS" class="preview-mockup mockup-threads" style="display:none;">
+          <div class="mock-header">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop" class="mock-avatar">
+            <span class="mock-name">kamrul_threads</span>
+          </div>
+          <div class="mock-body-text" id="threadsBodyPreview">Threads post preview...</div>
+          <div class="mock-media-container" id="threadsMediaPreview"></div>
+        </div>
+
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- MODAL: ADD ACCOUNT DIALOG -->
+  <div id="modalAddAccount" class="modal-overlay" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-user-plus"></i> Connect Social Media Account</h3>
+        <button class="btn-close-modal" id="btnCloseAddAccount"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Platform Type</label>
+          <select id="newAccPlatform">
+            <option value="FB_PAGE">Facebook Page</option>
+            <option value="FB_PROFILE">Facebook Personal Profile / ID</option>
+            <option value="INSTAGRAM">Instagram Business / Creator ID</option>
+            <option value="YOUTUBE">YouTube Channel</option>
+            <option value="X_TWITTER">X (Twitter) Account</option>
+            <option value="THREADS">Threads Account</option>
+            <option value="TIKTOK">TikTok Account</option>
+            <option value="LINKEDIN">LinkedIn Profile / Page</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Account / Page Name</label>
+          <input type="text" id="newAccName" placeholder="e.g., Tech World Bangladesh">
+        </div>
+        <div class="form-group">
+          <label>Handle or URL (Optional)</label>
+          <input type="text" id="newAccHandle" placeholder="e.g., @techworldbd">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btnCancelAddAccount">Cancel</button>
+        <button class="btn-primary" id="btnSaveNewAccount">Save Account</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: BYOK API SETTINGS DIALOG -->
+  <div id="modalSettings" class="modal-overlay" style="display:none;">
+    <div class="modal-card modal-large">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-key"></i> BYOK (Bring Your Own Keys) Credentials</h3>
+        <button class="btn-close-modal" id="btnCloseSettings"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <p class="settings-hint">
+          <i class="fa-solid fa-circle-info"></i> Enter your custom developer API keys below to use your isolated API quotas. If left blank, default system environment keys will be used.
+        </p>
+
+        <div class="settings-section">
+          <h4><i class="fa-brands fa-facebook" style="color:#1877f2;"></i> Meta Graph API (Facebook & Instagram)</h4>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Meta App ID</label>
+              <input type="text" id="settingMetaAppId" placeholder="10293847561029">
+            </div>
+            <div class="form-group">
+              <label>Meta App Secret</label>
+              <input type="password" id="settingMetaAppSecret" placeholder="••••••••••••••••">
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h4><i class="fa-brands fa-youtube" style="color:#ff0000;"></i> YouTube Data API v3</h4>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Google OAuth Client ID</label>
+              <input type="text" id="settingYtClientId" placeholder="123456-abcde.apps.googleusercontent.com">
+            </div>
+            <div class="form-group">
+              <label>Google OAuth Client Secret</label>
+              <input type="password" id="settingYtClientSecret" placeholder="••••••••••••••••">
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h4><i class="fa-brands fa-x-twitter"></i> X (Twitter) API v2</h4>
+          <div class="form-group">
+            <label>Twitter API Key</label>
+            <input type="text" id="settingXApiKey" placeholder="API key...">
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btnCancelSettings">Cancel</button>
+        <button class="btn-primary" id="btnSaveSettings">Save Key Credentials</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: AUDIT LOG HISTORY DIALOG -->
+  <div id="modalHistory" class="modal-overlay" style="display:none;">
+    <div class="modal-card modal-large">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-clock-rotate-left"></i> Published Post Audit Logs</h3>
+        <button class="btn-close-modal" id="btnCloseHistory"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div id="historyLogsContainer" class="history-logs-container">
+          <!-- Audit logs rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>

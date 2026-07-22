@@ -1,0 +1,102 @@
+// Open Social Cross-Poster Database Schema (Next.js + TS)
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String          @id @default(uuid())
+  email        String?         @unique
+  name         String
+  avatarUrl    String?
+  passwordHash String?
+  provider     String          @default("EMAIL")
+  providerId   String?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  accounts     SocialAccount[]
+  userSettings UserSettings?
+  postLogs     PostLog[]
+  liveStreams  LiveStream[]
+}
+
+model UserSettings {
+  id                  String   @id @default(uuid())
+  userId              String   @unique
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  metaAppId           String?
+  metaAppSecret       String?
+  googleClientId      String?
+  googleClientSecret  String?
+  xApiKey             String?
+  xApiSecret          String?
+  updatedAt           DateTime @updatedAt
+}
+
+model SocialAccount {
+  id           String    @id @default(uuid())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  platform     String
+  platformId   String
+  accountName  String
+  avatarUrl    String?
+  accessToken  String
+  refreshToken String?
+  isEnabled    Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  postLogItems PostLogItem[]
+
+  @@unique([userId, platform, platformId])
+}
+
+model LiveStream {
+  id              String   @id @default(uuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title           String
+  description     String?
+  targetPlatforms String
+  status          String   @default("IDLE")
+  createdAt       DateTime @default(now())
+}
+
+model PostLog {
+  id        String        @id @default(uuid())
+  userId    String
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content   String
+  mediaUrls String
+  tags      String?
+  status    String        // SUCCESS, PARTIAL, SCHEDULED, FAILED
+  createdAt DateTime      @default(now())
+  items     PostLogItem[]
+}
+
+model PostLogItem {
+  id            String        @id @default(uuid())
+  postLogId     String
+  postLog       PostLog       @relation(fields: [postLogId], references: [id], onDelete: Cascade)
+  accountId     String
+  account       SocialAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  status        String        // PUBLISHED, SCHEDULED, FAILED
+  publishedUrl  String?
+  errorMessage  String?
+  
+  // 30-Day Analytics & Reach Tracker
+  reach         Int           @default(0)
+  impressions   Int           @default(0)
+  likes         Int           @default(0)
+  comments      Int           @default(0)
+  shares        Int           @default(0)
+  
+  publishedAt   DateTime      @default(now())
+}
