@@ -66,12 +66,13 @@ export default function LoginPage() {
         {/* View 1: Choice Screen (Facebook, Google, Email) */}
         {authView === 'CHOICE' ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 10 }}>
-            {/* Facebook Button */}
+            {/* Facebook Button (White Background) */}
             <button 
               className="btn" 
               style={{ 
-                backgroundColor: '#1877F2', 
-                color: 'white', 
+                backgroundColor: '#FFFFFF', 
+                color: '#050505', 
+                border: '1px solid #CED0D4',
                 width: '100%', 
                 justifyContent: 'center',
                 padding: '12px 18px',
@@ -83,7 +84,7 @@ export default function LoginPage() {
               }}
               onClick={handleSuccessfulAuth}
             >
-              <Facebook size={18} fill="white" color="white" />
+              <Facebook size={18} fill="#1877F2" color="#1877F2" />
               <span>Facebook</span>
             </button>
 
