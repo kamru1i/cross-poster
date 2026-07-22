@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Globe, Video, Settings, UserCheck, Share2 } from 'lucide-react';
 
 export const metadata = {
-  title: 'cross-poster | Social Cross-Posting & Live Streamer',
+  title: 'Cross Poster | Social Cross-Posting & Live Streamer',
   description: 'Self-Hosted Multi-Tenant Cross-Posting & Multi-Platform Live Streaming System',
 };
 
@@ -19,7 +19,7 @@ export default function RootLayout({
         <nav className="navbar">
           <Link href="/" className="brand-title">
             <Share2 size={24} color="#1877F2" />
-            <span>cross-poster</span>
+            <span>Cross Poster</span>
           </Link>
           <div className="nav-links">
             <Link href="/" className="nav-item">

@@ -20,7 +20,7 @@ export default function LoginPage() {
       <div className="card" style={{ textAlign: 'center' }}>
         <div style={{ marginBottom: 20 }}>
           <h1 style={{ fontSize: 24, fontWeight: 700, color: '#1877F2' }}>
-            {isRegister ? 'Join cross-poster' : 'Welcome to cross-poster'}
+            {isRegister ? 'Join Cross Poster' : 'Welcome to Cross Poster'}
           </h1>
           <p style={{ color: '#65676B', fontSize: 14 }}>
             Sign in to manage your cross-posting & live streaming
