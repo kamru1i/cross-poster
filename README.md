@@ -1,47 +1,61 @@
-# 🌐 Open Social Cross-Poster & Multi-Platform Live Streamer
+# Cross Poster
 
-> **100% Free, Open-Source, Multi-Tenant Social Media Cross-Posting & Simultaneous Live Streaming Web App**  
-> Post simultaneously or selectively across **Facebook Profiles, Facebook Pages, Instagram, YouTube Channels (Videos & Shorts), X (Twitter), Threads, TikTok, and LinkedIn** with zero monthly subscription fees!
-
----
-
-## ⚡ Key Features
-
-- **🛡️ 100% Free & Self-Hosted**: No $30-$100/mo third-party fees (Buffer/Hootsuite). You own the code and host it for free.
-- **🎨 Facebook Blue & Crisp White Theme**: Designed with a clean Facebook signature palette (`#1877F2`) and official platform brand badges.
-- **📺 Multi-Platform Simultaneous Live Streaming**: Broadcast live from browser studio or mobile camera across Facebook Live, YouTube Live, and Custom RTMP destinations.
-- **👥 Multi-Tenant & User Privacy**: Each user registers their own workspace. User A's connected accounts and posts are 100% isolated from User B.
-- **🔑 BYOK (Bring Your Own Keys)**: Users can enter their own Meta App ID / Google OAuth keys in Settings with **AES-256 Encryption**, preventing global rate limits.
-- **📅 Meta Business Suite Post Scheduling**: Schedule posts for a future date & time with auto-recommended optimal posting hours.
-- **🏷️ Tagging & Mentions System**: Add hashtags (`#TechNews`), account mentions (`@PartnerBrand`), and location tags.
-- **📈 30-Day Reach & Analytics Insights**: Track total reach, impressions, likes, comments, and engagement history.
+> **Unified Multi-Platform Content Publishing & Simultaneous Live Streaming Studio**  
+> Built with Next.js 14, TypeScript, Tailwind/Vanilla CSS, and Prisma.
 
 ---
 
-## 🚀 Quick Start (Local Setup)
+## 🚀 Overview
 
-### 1. Prerequisites
-- Node.js 18+ installed
+**Cross Poster** is a powerful internal studio designed for creators, developers, and media managers to publish posts, schedule content, track 30-day reach analytics, and broadcast simultaneous RTMP live streams across multiple social platforms from a single unified dashboard.
 
-### 2. Installation
-```bash
-git clone https://github.com/kamru1i/cross-poster.git
-cd cross-poster
-npm install
-```
-
-### 3. Database Setup
-```bash
-npx prisma db push
-```
-
-### 4. Run Development Server
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) in your browser!
+Since this application is built for personal/internal team use, all auth barriers have been removed for instant, frictionless studio access.
 
 ---
 
-## 📜 License
-MIT License. Free for commercial and non-commercial open-source use.
+## ✨ Features
+
+- 📢 **Multi-Platform Post Studio**: Publish text, images, and videos simultaneously to Facebook Pages, Instagram Business, YouTube Channels, X (Twitter), and Threads.
+- 🔴 **Simultaneous Live Streaming Studio**: Multi-stream live broadcasts via RTMP relay to Facebook Live, YouTube Live, Twitch, and LinkedIn Live.
+- 📅 **Meta Business Suite Scheduling & Tagging**: Schedule future posts, select optimal AI recommended posting times, and manage hashtags/mentions.
+- 📊 **30-Day Reach & Performance Insights**: Real-time aggregated reach metrics (Total Reach, Impressions, Likes, Reactions, Comments).
+- 🔑 **Bring Your Own Key (BYOK) AES-256 Storage**: Securely input your Meta Developer App ID/Secret, Google OAuth credentials, and API keys directly from the UI.
+- ⚙️ **Account & Security Settings**: Update profile information, reset passwords, or manage account data.
+- 📚 **Interactive In-App Documentation**: Full-width fluid documentation hub with step-by-step setup guides (`/docs`).
+
+---
+
+## 🛠️ Technology Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript 5+
+- **Styling**: Vanilla CSS Design System with Facebook Blue (`#1877F2`) Theme
+- **Database**: Prisma ORM with SQLite (`dev.db`)
+- **Icons**: Lucide React
+
+---
+
+## 🚀 Quick Start & Development
+
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Setup Database**:
+   ```bash
+   npx prisma db push
+   ```
+
+3. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to start using Cross Poster directly!
+
+---
+
+## 📄 License
+
+Internal / Private Workspace License. All rights reserved.

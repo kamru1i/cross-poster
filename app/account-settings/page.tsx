@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { User, Lock, Trash2, CheckCircle2, ShieldAlert, Key, Save } from 'lucide-react';
 
 export default function AccountSettingsPage() {
-  const [authState, setAuthState] = useState<'CHECKING' | 'AUTHENTICATED'>('CHECKING');
   const [activeTab, setActiveTab] = useState<'PROFILE' | 'SECURITY' | 'DANGER'>('PROFILE');
 
   // Profile Form States
@@ -20,17 +19,6 @@ export default function AccountSettingsPage() {
 
   // Delete Account Modal State
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-  React.useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    if (!isLoggedIn) {
-      window.location.href = '/';
-    } else {
-      setAuthState('AUTHENTICATED');
-    }
-  }, []);
-
-  if (authState === 'CHECKING') return null;
 
   const handleUpdateProfile = (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,8 +40,7 @@ export default function AccountSettingsPage() {
   };
 
   const handleDeleteAccount = () => {
-    localStorage.removeItem('isLoggedIn');
-    alert('Your Cross Poster account and all associated data have been permanently deleted.');
+    alert('Your Cross Poster account and all associated data have been reset.');
     window.location.href = '/';
   };
 
@@ -89,7 +76,7 @@ export default function AccountSettingsPage() {
             onClick={() => setActiveTab('DANGER')}
             style={{ fontSize: 13 }}
           >
-            <Trash2 size={16} /> Danger Zone (Delete Account)
+            <Trash2 size={16} /> Reset Account Data
           </button>
         </div>
 
@@ -181,23 +168,23 @@ export default function AccountSettingsPage() {
           </form>
         )}
 
-        {/* Tab 3: Danger Zone (Delete Account) */}
+        {/* Tab 3: Danger Zone */}
         {activeTab === 'DANGER' && (
           <div style={{ backgroundColor: '#FFF5F5', border: '1px solid #FFC9C9', padding: 20, borderRadius: 10, maxWidth: 600 }}>
             <h3 style={{ fontSize: 16, fontWeight: 700, color: '#FF0000', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
-              <ShieldAlert size={20} /> Permanent Account Deletion
+              <ShieldAlert size={20} /> Reset Account Data
             </h3>
             <p style={{ fontSize: 14, color: '#050505', marginBottom: 16 }}>
-              Deleting your Cross Poster account will permanently remove your connected Facebook Pages, YouTube channels, saved BYOK keys, and post history. This action cannot be undone.
+              Resetting your Cross Poster data will remove saved BYOK keys and post history.
             </p>
             <button className="btn btn-live" onClick={() => setShowDeleteModal(true)}>
-              <Trash2 size={16} /> Delete My Account
+              <Trash2 size={16} /> Reset Account Data
             </button>
           </div>
         )}
       </div>
 
-      {/* Delete Account Confirmation Modal */}
+      {/* Confirmation Modal */}
       {showDeleteModal && (
         <div style={{
           position: 'fixed',
@@ -213,11 +200,11 @@ export default function AccountSettingsPage() {
             <ShieldAlert size={36} color="#FF0000" style={{ margin: '0 auto 12px' }} />
             <h2 style={{ fontSize: 20, fontWeight: 700, color: '#FF0000', marginBottom: 8 }}>Are you absolutely sure?</h2>
             <p style={{ fontSize: 14, color: '#65676B', marginBottom: 20 }}>
-              This will permanently delete your account, connected social accounts, and 30-day analytics history.
+              This will reset your local saved configuration data.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
               <button className="btn btn-secondary" onClick={() => setShowDeleteModal(false)}>Cancel</button>
-              <button className="btn btn-live" onClick={handleDeleteAccount}>Yes, Delete Account</button>
+              <button className="btn btn-live" onClick={handleDeleteAccount}>Yes, Reset Data</button>
             </div>
           </div>
         </div>
