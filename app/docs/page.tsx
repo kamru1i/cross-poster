@@ -13,7 +13,13 @@ import {
   HelpCircle,
   Play,
   Calendar,
-  Tag
+  Tag,
+  Check,
+  Zap,
+  Globe,
+  Share2,
+  Lock,
+  Layers
 } from 'lucide-react';
 
 export default function DocumentationPage() {
@@ -30,13 +36,18 @@ export default function DocumentationPage() {
   ];
 
   return (
-    <div style={{ maxWidth: 1200, margin: '30px auto', padding: '0 20px', display: 'grid', gridTemplateColumns: '280px 1fr', gap: 24 }}>
+    <div style={{ width: '100%', maxWidth: '1600px', margin: '0 auto', padding: '24px 32px', display: 'grid', gridTemplateColumns: '320px 1fr', gap: 28 }}>
       {/* Sidebar Documentation Menu */}
-      <div className="card" style={{ height: 'fit-content', position: 'sticky', top: 80, padding: 16 }}>
-        <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1877F2', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <BookOpen size={18} /> User Documentation
-        </h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <div className="card" style={{ height: 'fit-content', position: 'sticky', top: 80, padding: 20 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20, paddingBottom: 12, borderBottom: '1px solid #E4E6EB' }}>
+          <BookOpen size={22} color="#1877F2" />
+          <div>
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1877F2' }}>Documentation</h3>
+            <span style={{ fontSize: 12, color: '#65676B' }}>Cross Poster Master Guide</span>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {menuItems.map(item => {
             const Icon = item.icon;
             const isActive = activeSection === item.id;
@@ -47,20 +58,21 @@ export default function DocumentationPage() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 10,
-                  padding: '10px 14px',
-                  borderRadius: 8,
+                  gap: 12,
+                  padding: '12px 16px',
+                  borderRadius: 10,
                   border: 'none',
                   background: isActive ? '#E7F3FF' : 'transparent',
-                  color: isActive ? '#1877F2' : '#65676B',
+                  color: isActive ? '#1877F2' : '#050505',
                   fontWeight: isActive ? 700 : 500,
-                  fontSize: 13,
+                  fontSize: 14,
                   cursor: 'pointer',
                   textAlign: 'left',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.2s ease',
+                  boxShadow: isActive ? '0 2px 6px rgba(24, 119, 242, 0.15)' : 'none'
                 }}
               >
-                <Icon size={16} />
+                <Icon size={18} color={isActive ? '#1877F2' : '#65676B'} />
                 <span>{item.title}</span>
               </button>
             );
@@ -69,49 +81,55 @@ export default function DocumentationPage() {
       </div>
 
       {/* Main Documentation Content Area */}
-      <div className="card">
+      <div className="card" style={{ minHeight: '650px', padding: 32 }}>
         {activeSection === 'getting-started' && (
           <div>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#1877F2', marginBottom: 12 }}>
-              1. Getting Started with Cross Poster
-            </h2>
-            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 20 }}>
-              Welcome to <strong>Cross Poster</strong>! This self-hosted application allows you to publish, schedule, and broadcast live streams across Facebook, Instagram, YouTube, X, Threads, TikTok, and LinkedIn with 100% free API quota.
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+              <BookOpen size={28} color="#1877F2" />
+              <h2 style={{ fontSize: 24, fontWeight: 700, color: '#1877F2' }}>
+                1. Quick Start & Application Overview
+              </h2>
+            </div>
+            <p style={{ color: '#65676B', fontSize: 15, lineHeight: 1.6, marginBottom: 24 }}>
+              Welcome to <strong>Cross Poster</strong>! This self-hosted, multi-tenant application allows you and your team to publish posts, schedule future content, and broadcast simultaneous live streams across <strong>Facebook, Instagram, YouTube, X (Twitter), Threads, TikTok, and LinkedIn</strong> with zero monthly subscription fees.
             </p>
 
-            <div style={{ backgroundColor: '#E7F3FF', borderLeft: '4px solid #1877F2', padding: 16, borderRadius: 8, marginBottom: 20 }}>
-              <h4 style={{ fontSize: 14, fontWeight: 700, color: '#1877F2', marginBottom: 6 }}>Key Workflow Steps:</h4>
-              <ol style={{ paddingLeft: 20, fontSize: 14, color: '#050505', display: 'flex', flexDirection: 'column', gap: 6 }}>
-                <li>Log in using <strong>Facebook OAuth</strong>, <strong>Google OAuth</strong>, or <strong>Email & Password</strong>.</li>
-                <li>Go to <strong>BYOK Settings</strong> to enter your free platform API credentials.</li>
-                <li>Connect your target Facebook Pages, Instagram Accounts, and YouTube Channels.</li>
-                <li>Use <strong>Post Studio</strong> or <strong>Live Studio</strong> to broadcast instantly or schedule for peak engagement hours.</li>
-              </ol>
+            <div style={{ backgroundColor: '#E7F3FF', borderLeft: '4px solid #1877F2', padding: 20, borderRadius: 10, marginBottom: 24 }}>
+              <h4 style={{ fontSize: 15, fontWeight: 700, color: '#1877F2', marginBottom: 10 }}>🚀 Core Application Features:</h4>
+              <ul style={{ paddingLeft: 20, fontSize: 14, color: '#050505', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <li><strong>Multi-Partner Workspace Isolation</strong>: You and your partner log in independently to your own private account workspaces.</li>
+                <li><strong>BYOK (Bring Your Own Keys)</strong>: Enter your own official free platform API keys directly in the UI.</li>
+                <li><strong>Meta Suite Post Scheduling</strong>: Schedule future posts with AI-recommended peak audience active times.</li>
+                <li><strong>Multi-Platform Live Streaming</strong>: Broadcast live streams simultaneously across Facebook Live, YouTube Live, and Custom RTMP destinations.</li>
+              </ul>
             </div>
           </div>
         )}
 
         {activeSection === 'meta-setup' && (
           <div>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#1877F2', marginBottom: 12 }}>
-              2. Connecting Facebook Pages & Instagram Accounts
-            </h2>
-            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 20 }}>
-              Learn how to connect your Facebook Pages, Facebook Profiles, and Instagram Business Accounts to Cross Poster.
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+              <CheckCircle2 size={28} color="#1877F2" />
+              <h2 style={{ fontSize: 24, fontWeight: 700, color: '#1877F2' }}>
+                2. Connecting Facebook Pages & Instagram Accounts
+              </h2>
+            </div>
+            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 24 }}>
+              Step-by-step instructions to connect your Facebook Pages, Profiles, and Instagram Business accounts.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              <div style={{ border: '1px solid #CED0D4', borderRadius: 8, padding: 16 }}>
-                <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1877F2', marginBottom: 6 }}>Step 1: Obtain Meta Credentials</h3>
-                <p style={{ fontSize: 14, color: '#050505' }}>
-                  Go to <a href="https://developers.facebook.com/" target="_blank" rel="noreferrer" style={{ color: '#1877F2' }}>developers.facebook.com</a>, create a Business App, and copy your <strong>Meta App ID</strong> and <strong>Meta App Secret</strong>.
+              <div style={{ border: '1px solid #CED0D4', borderRadius: 10, padding: 20, background: '#FFFFFF' }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1877F2', marginBottom: 8 }}>Step 1: Obtain Meta Developer Credentials</h3>
+                <p style={{ fontSize: 14, color: '#050505', lineHeight: 1.5 }}>
+                  Go to <a href="https://developers.facebook.com/" target="_blank" rel="noreferrer" style={{ color: '#1877F2', fontWeight: 600 }}>developers.facebook.com</a>, click <strong>Create App</strong>, choose <strong>Business</strong>, and copy your <strong>Meta App ID</strong> and <strong>Meta App Secret</strong>.
                 </p>
               </div>
 
-              <div style={{ border: '1px solid #CED0D4', borderRadius: 8, padding: 16 }}>
-                <h3 style={{ fontSize: 15, fontWeight: 700, color: '#1877F2', marginBottom: 6 }}>Step 2: Add Required Permissions</h3>
-                <p style={{ fontSize: 14, color: '#050505' }}>
-                  Ensure your app has access to <code>pages_manage_posts</code>, <code>pages_read_engagement</code>, <code>instagram_basic</code>, and <code>instagram_content_publish</code>.
+              <div style={{ border: '1px solid #CED0D4', borderRadius: 10, padding: 20, background: '#FFFFFF' }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1877F2', marginBottom: 8 }}>Step 2: Required Products & Scopes</h3>
+                <p style={{ fontSize: 14, color: '#050505', lineHeight: 1.5 }}>
+                  Add <strong>Facebook Login for Business</strong>, <strong>Instagram Graph API</strong>, and request permissions: <code>pages_manage_posts</code>, <code>pages_read_engagement</code>, <code>instagram_content_publish</code>.
                 </p>
               </div>
             </div>
@@ -120,20 +138,23 @@ export default function DocumentationPage() {
 
         {activeSection === 'youtube-setup' && (
           <div>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#FF0000', marginBottom: 12 }}>
-              3. Connecting YouTube Channels (Videos & Shorts)
-            </h2>
-            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 20 }}>
-              Follow these steps to enable 4K video uploads and YouTube Shorts cross-posting.
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+              <Play size={28} color="#FF0000" />
+              <h2 style={{ fontSize: 24, fontWeight: 700, color: '#FF0000' }}>
+                3. Connecting YouTube Channels (Videos & Shorts)
+              </h2>
+            </div>
+            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 24 }}>
+              Enable 4K video uploads and YouTube Shorts cross-posting for your YouTube Channel.
             </p>
 
-            <div style={{ border: '1px solid #CED0D4', borderRadius: 8, padding: 16 }}>
-              <h3 style={{ fontSize: 15, fontWeight: 700, color: '#FF0000', marginBottom: 6 }}>Google Cloud Setup</h3>
-              <ol style={{ paddingLeft: 20, fontSize: 14, color: '#050505', display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <li>Go to <a href="https://console.cloud.google.com/" target="_blank" rel="noreferrer" style={{ color: '#FF0000' }}>Google Cloud Console</a>.</li>
+            <div style={{ border: '1px solid #CED0D4', borderRadius: 10, padding: 20, background: '#FFFFFF' }}>
+              <h3 style={{ fontSize: 16, fontWeight: 700, color: '#FF0000', marginBottom: 10 }}>Google Cloud Setup Steps</h3>
+              <ol style={{ paddingLeft: 20, fontSize: 14, color: '#050505', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <li>Navigate to <a href="https://console.cloud.google.com/" target="_blank" rel="noreferrer" style={{ color: '#FF0000', fontWeight: 600 }}>Google Cloud Console</a>.</li>
                 <li>Enable <strong>YouTube Data API v3</strong> and <strong>YouTube Live Streaming API</strong>.</li>
                 <li>Create an <strong>OAuth 2.0 Client ID</strong> (Web Application).</li>
-                <li>Enter the Client ID and Client Secret in Cross Poster's <strong>BYOK Settings</strong>.</li>
+                <li>Copy the Client ID and Client Secret, then paste them in <strong>⚙️ BYOK Settings</strong> in Cross Poster.</li>
               </ol>
             </div>
           </div>
@@ -141,15 +162,19 @@ export default function DocumentationPage() {
 
         {activeSection === 'byok-setup' && (
           <div>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#1877F2', marginBottom: 12 }}>
-              4. BYOK (Bring Your Own Keys) Encryption Settings
-            </h2>
-            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 20 }}>
-              Cross Poster uses AES-256 encryption to store your API keys securely on the server.
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+              <Key size={28} color="#1877F2" />
+              <h2 style={{ fontSize: 24, fontWeight: 700, color: '#1877F2' }}>
+                4. BYOK (Bring Your Own Keys) Encryption Settings
+              </h2>
+            </div>
+            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 24 }}>
+              Cross Poster uses AES-256 encryption to store your API keys securely on the server without rate limit restrictions.
             </p>
-            <div style={{ backgroundColor: '#F0F2F5', padding: 16, borderRadius: 8 }}>
-              <p style={{ fontSize: 14, color: '#050505' }}>
-                Navigate to <strong>⚙️ BYOK Settings</strong> from the top navbar, paste your credentials, and click <strong>Save Encrypted Credentials</strong>.
+
+            <div style={{ backgroundColor: '#F0F2F5', padding: 20, borderRadius: 10 }}>
+              <p style={{ fontSize: 14, color: '#050505', lineHeight: 1.6 }}>
+                Open <strong>⚙️ BYOK Settings</strong> from the top navbar header, enter your platform credentials, and click <strong>Save Encrypted Credentials</strong>. All keys are encrypted before storing to database.
               </p>
             </div>
           </div>
@@ -157,15 +182,19 @@ export default function DocumentationPage() {
 
         {activeSection === 'post-scheduling' && (
           <div>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#1877F2', marginBottom: 12 }}>
-              5. Meta Suite Post Scheduling & Hashtags
-            </h2>
-            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 20 }}>
-              Learn how to schedule future posts and use AI-recommended best posting times.
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+              <Calendar size={28} color="#1877F2" />
+              <h2 style={{ fontSize: 24, fontWeight: 700, color: '#1877F2' }}>
+                5. Meta Suite Post Scheduling & Tags
+              </h2>
+            </div>
+            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 24 }}>
+              Schedule future posts and use AI-recommended peak audience active times.
             </p>
-            <ol style={{ paddingLeft: 20, fontSize: 14, color: '#050505', display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <li>In <strong>Post Studio</strong>, switch to the <strong>Schedule Post</strong> tab.</li>
-              <li>Click on <strong>⚡ Optimal Posting Time</strong> to auto-fill peak engagement hours.</li>
+
+            <ol style={{ paddingLeft: 20, fontSize: 14, color: '#050505', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <li>In <strong>Post Studio</strong>, click on the <strong>Schedule Post</strong> tab.</li>
+              <li>Click <strong>⚡ Optimal Posting Time</strong> to auto-set peak follower engagement hours.</li>
               <li>Add hashtags (`#TechNews`) or account tags (`@PartnerBrand`) before scheduling.</li>
             </ol>
           </div>
@@ -173,30 +202,38 @@ export default function DocumentationPage() {
 
         {activeSection === 'live-streaming' && (
           <div>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#FF0000', marginBottom: 12 }}>
-              6. Multi-Platform Live Streaming Guide
-            </h2>
-            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 20 }}>
-              Broadcast live from your web camera or mobile app to Facebook Live, YouTube Live, and Custom RTMP targets simultaneously.
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+              <Radio size={28} color="#FF0000" />
+              <h2 style={{ fontSize: 24, fontWeight: 700, color: '#FF0000' }}>
+                6. Multi-Platform Live Streaming Guide
+              </h2>
+            </div>
+            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 24 }}>
+              Broadcast live from your web camera or mobile app across Facebook Live, YouTube Live, and Custom RTMP destinations simultaneously.
             </p>
-            <ol style={{ paddingLeft: 20, fontSize: 14, color: '#050505', display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <li>Open <strong>Live Studio</strong> from the top navbar.</li>
+
+            <ol style={{ paddingLeft: 20, fontSize: 14, color: '#050505', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <li>Go to <strong>Live Studio</strong> from the navbar header.</li>
               <li>Select your target live platforms (e.g. ✅ Facebook Live + ✅ YouTube Live).</li>
-              <li>Enter a stream title and click <strong>Start Multi-Live Stream</strong>.</li>
+              <li>Enter a broadcast title and click <strong>Start Multi-Live Stream</strong>.</li>
             </ol>
           </div>
         )}
 
         {activeSection === 'analytics-logs' && (
           <div>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#1877F2', marginBottom: 12 }}>
-              7. 30-Day Reach & Analytics Insights
-            </h2>
-            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 20 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+              <BarChart3 size={28} color="#1877F2" />
+              <h2 style={{ fontSize: 24, fontWeight: 700, color: '#1877F2' }}>
+                7. 30-Day Reach & Analytics Insights
+              </h2>
+            </div>
+            <p style={{ color: '#65676B', fontSize: 15, marginBottom: 24 }}>
               Track 30-day total reach, impressions, likes, and comments across all platforms.
             </p>
-            <div style={{ backgroundColor: '#F0F2F5', padding: 16, borderRadius: 8 }}>
-              <p style={{ fontSize: 14, color: '#050505' }}>
+
+            <div style={{ backgroundColor: '#F0F2F5', padding: 20, borderRadius: 10 }}>
+              <p style={{ fontSize: 14, color: '#050505', lineHeight: 1.6 }}>
                 All published posts automatically sync performance stats via Graph APIs. View detailed breakdown under the <strong>30-Day Social Reach Insights</strong> card on the homepage.
               </p>
             </div>
