@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Radio, Video, Play, Square, Settings, ShieldCheck, Check } from 'lucide-react';
 
 export default function LiveStudioPage() {
+  const [authState, setAuthState] = React.useState<'CHECKING' | 'AUTHENTICATED'>('CHECKING');
   const [streamTitle, setStreamTitle] = useState('');
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(['FB_LIVE', 'YT_LIVE']);
   const [isStreaming, setIsStreaming] = useState(false);
@@ -11,9 +12,13 @@ export default function LiveStudioPage() {
   React.useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     if (!isLoggedIn) {
-      window.location.href = '/login';
+      window.location.href = '/';
+    } else {
+      setAuthState('AUTHENTICATED');
     }
   }, []);
+
+  if (authState === 'CHECKING') return null;
 
   const availablePlatforms = [
     { id: 'FB_LIVE', name: 'Facebook Live', color: '#1877F2' },

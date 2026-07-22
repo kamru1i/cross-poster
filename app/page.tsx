@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Send, 
   Image as ImageIcon, 
@@ -24,6 +24,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { SocialPlatform, PublishResult, PostPublishMode, BestTimeRecommendation } from '@/types/social';
+import LoginForm from '@/components/LoginForm';
 
 interface ConnectedAccount {
   id: string;
@@ -34,18 +35,12 @@ interface ConnectedAccount {
 }
 
 export default function PostStudioPage() {
+  const [authState, setAuthState] = useState<'CHECKING' | 'AUTHENTICATED' | 'UNAUTHENTICATED'>('CHECKING');
   const [caption, setCaption] = useState('');
   const [selectedAccountIds, setSelectedAccountIds] = useState<string[]>([
     'fb-page-1', 'yt-channel-1', 'ig-account-1'
   ]);
   const [mediaFile, setMediaFile] = useState<File | null>(null);
-
-  React.useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    if (!isLoggedIn) {
-      window.location.href = '/login';
-    }
-  }, []);
   
   // Meta Business Suite Features
   const [publishMode, setPublishMode] = useState<PostPublishMode>('IMMEDIATE');
@@ -55,6 +50,16 @@ export default function PostStudioPage() {
   
   const [isProcessing, setIsProcessing] = useState(false);
   const [logFilterRange, setLogFilterRange] = useState<'7DAYS' | '30DAYS' | 'ALL'>('30DAYS');
+
+  useEffect(() => {
+    // Instant zero-flash auth check
+    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (loggedIn) {
+      setAuthState('AUTHENTICATED');
+    } else {
+      setAuthState('UNAUTHENTICATED');
+    }
+  }, []);
 
   // Connected Accounts
   const accounts: ConnectedAccount[] = [
@@ -185,7 +190,21 @@ export default function PostStudioPage() {
     }, 1500);
   };
 
-  // Calculate 30-Day Totals
+  // Prevent 1-second dashboard flash while checking auth
+  if (authState === 'CHECKING') {
+    return (
+      <div style={{ minHeight: 'calc(100vh - 60px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ color: '#1877F2', fontWeight: 600, fontSize: 14 }}>Loading Cross Poster...</div>
+      </div>
+    );
+  }
+
+  // Render Login Form at root URL / if unauthenticated
+  if (authState === 'UNAUTHENTICATED') {
+    return <LoginForm onLoginSuccess={() => setAuthState('AUTHENTICATED')} />;
+  }
+
+  // Calculate 30-Day Totals for Authenticated Dashboard
   const totalReach = auditLogs.reduce((sum, log) => sum + (log.analytics?.reach || 0), 0);
   const totalImpressions = auditLogs.reduce((sum, log) => sum + (log.analytics?.impressions || 0), 0);
   const totalLikes = auditLogs.reduce((sum, log) => sum + (log.analytics?.likes || 0), 0);

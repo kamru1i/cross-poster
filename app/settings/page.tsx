@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Key, Shield, Save, CheckCircle, Lock, Info } from 'lucide-react';
 
 export default function SettingsPage() {
+  const [authState, setAuthState] = React.useState<'CHECKING' | 'AUTHENTICATED'>('CHECKING');
   const [metaAppId, setMetaAppId] = useState('');
   const [metaAppSecret, setMetaAppSecret] = useState('');
   const [googleClientId, setGoogleClientId] = useState('');
@@ -16,9 +17,13 @@ export default function SettingsPage() {
   React.useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     if (!isLoggedIn) {
-      window.location.href = '/login';
+      window.location.href = '/';
+    } else {
+      setAuthState('AUTHENTICATED');
     }
   }, []);
+
+  if (authState === 'CHECKING') return null;
 
   const handleSaveKeys = (e: React.FormEvent) => {
     e.preventDefault();
