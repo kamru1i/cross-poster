@@ -16,19 +16,27 @@ import {
   Radio, 
   BarChart3, 
   CheckCircle2,
-  PlusSquare
+  PlusSquare,
+  TrendingUp,
+  Share2
 } from 'lucide-react';
 
 export default function Sidebar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentSection = searchParams ? searchParams.get('section') || 'getting-started' : 'getting-started';
+  
+  const currentDocSection = searchParams ? searchParams.get('section') || 'getting-started' : 'getting-started';
+  const currentAnalyticsPlatform = searchParams ? searchParams.get('platform') || 'ALL' : 'ALL';
 
   const [isDocsExpanded, setIsDocsExpanded] = useState(pathname === '/docs');
+  const [isAnalyticsExpanded, setIsAnalyticsExpanded] = useState(pathname === '/analytics');
 
   useEffect(() => {
     if (pathname === '/docs') {
       setIsDocsExpanded(true);
+    }
+    if (pathname === '/analytics') {
+      setIsAnalyticsExpanded(true);
     }
   }, [pathname]);
 
@@ -40,6 +48,17 @@ export default function Sidebar() {
     { id: 'post-scheduling', label: '5. Meta Suite Scheduling', icon: Calendar },
     { id: 'live-streaming', label: '6. Multi-Platform Live Studio', icon: Radio },
     { id: 'analytics-logs', label: '7. 30-Day Reach Analytics', icon: BarChart3 },
+  ];
+
+  // Configured Platform Analytics Submenus
+  const analyticsSubmenus = [
+    { id: 'ALL', label: 'Overview (All Platforms)', color: '#1877F2' },
+    { id: 'META', label: 'Meta (FB & IG)', color: '#1877F2' },
+    { id: 'YOUTUBE', label: 'YouTube Studio', color: '#FF0000' },
+    { id: 'X_TWITTER', label: 'X (Twitter)', color: '#000000' },
+    { id: 'THREADS', label: 'Threads', color: '#000000' },
+    { id: 'TIKTOK', label: 'TikTok', color: '#25F4EE' },
+    { id: 'LINKEDIN', label: 'LinkedIn', color: '#0A66C2' },
   ];
 
   return (
@@ -63,6 +82,7 @@ export default function Sidebar() {
         Studio Navigation
       </div>
 
+      {/* 1. Create Post */}
       <Link 
         href="/" 
         className={`nav-item ${pathname === '/' ? 'active' : ''}`}
@@ -83,6 +103,7 @@ export default function Sidebar() {
         <span>Create Post</span>
       </Link>
 
+      {/* 2. Create Live */}
       <Link 
         href="/live" 
         className={`nav-item ${pathname === '/live' ? 'active' : ''}`}
@@ -103,6 +124,7 @@ export default function Sidebar() {
         <span>Create Live</span>
       </Link>
 
+      {/* 3. API Setup */}
       <Link 
         href="/settings" 
         className={`nav-item ${pathname === '/settings' ? 'active' : ''}`}
@@ -123,8 +145,63 @@ export default function Sidebar() {
         <span>API Setup</span>
       </Link>
 
-      {/* Documentation Main Section & Expandable Subtabs */}
-      <div style={{ marginTop: 6 }}>
+      {/* 4. Analytics Main Section & Expandable Platform Submenus */}
+      <div style={{ marginTop: 2 }}>
+        <div
+          onClick={() => setIsAnalyticsExpanded(!isAnalyticsExpanded)}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '10px 14px',
+            borderRadius: 8,
+            cursor: 'pointer',
+            color: pathname === '/analytics' ? '#1877F2' : '#050505',
+            backgroundColor: pathname === '/analytics' ? '#E7F3FF' : 'transparent',
+            fontWeight: pathname === '/analytics' ? 700 : 500,
+            fontSize: 14
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <BarChart3 size={18} color={pathname === '/analytics' ? '#1877F2' : '#65676B'} />
+            <span>Analytics</span>
+          </div>
+          {isAnalyticsExpanded ? <ChevronDown size={16} color="#65676B" /> : <ChevronRight size={16} color="#65676B" />}
+        </div>
+
+        {/* Render Analytics Platform Submenus when expanded */}
+        {isAnalyticsExpanded && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginTop: 6, paddingLeft: 14, borderLeft: '2px solid #E4E6EB', marginLeft: 16 }}>
+            {analyticsSubmenus.map(tab => {
+              const isSelectedTab = pathname === '/analytics' && currentAnalyticsPlatform.toUpperCase() === tab.id.toUpperCase();
+              return (
+                <Link
+                  key={tab.id}
+                  href={`/analytics?platform=${tab.id}`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    padding: '8px 10px',
+                    borderRadius: 6,
+                    textDecoration: 'none',
+                    fontSize: 13,
+                    color: isSelectedTab ? '#1877F2' : '#65676B',
+                    backgroundColor: isSelectedTab ? '#E7F3FF' : 'transparent',
+                    fontWeight: isSelectedTab ? 700 : 400
+                  }}
+                >
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: tab.color, display: 'inline-block' }} />
+                  <span>{tab.label}</span>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* 5. Documentation Main Section & Expandable Subtabs */}
+      <div style={{ marginTop: 2 }}>
         <div
           onClick={() => setIsDocsExpanded(!isDocsExpanded)}
           style={{
@@ -152,7 +229,7 @@ export default function Sidebar() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginTop: 6, paddingLeft: 14, borderLeft: '2px solid #E4E6EB', marginLeft: 16 }}>
             {docSubtabs.map(tab => {
               const Icon = tab.icon;
-              const isSelectedTab = pathname === '/docs' && currentSection === tab.id;
+              const isSelectedTab = pathname === '/docs' && currentDocSection === tab.id;
               return (
                 <Link
                   key={tab.id}
