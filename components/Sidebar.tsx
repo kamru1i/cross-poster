@@ -15,7 +15,8 @@ import {
   Calendar, 
   Radio, 
   BarChart3, 
-  CheckCircle2 
+  CheckCircle2,
+  PlusSquare
 } from 'lucide-react';
 
 export default function Sidebar() {
@@ -35,7 +36,7 @@ export default function Sidebar() {
     { id: 'getting-started', label: '1. Quick Start & Overview', icon: BookOpen },
     { id: 'meta-setup', label: '2. Facebook & Instagram Setup', icon: CheckCircle2 },
     { id: 'youtube-setup', label: '3. YouTube Setup', icon: Play },
-    { id: 'byok-setup', label: '4. BYOK API Keys Config', icon: Key },
+    { id: 'byok-setup', label: '4. API Setup Keys Config', icon: Key },
     { id: 'post-scheduling', label: '5. Meta Suite Scheduling', icon: Calendar },
     { id: 'live-streaming', label: '6. Multi-Platform Live Studio', icon: Radio },
     { id: 'analytics-logs', label: '7. 30-Day Reach Analytics', icon: BarChart3 },
@@ -78,8 +79,8 @@ export default function Sidebar() {
           fontSize: 14
         }}
       >
-        <Globe size={18} color={pathname === '/' ? '#1877F2' : '#65676B'} />
-        <span>Post Studio</span>
+        <PlusSquare size={18} color={pathname === '/' ? '#1877F2' : '#65676B'} />
+        <span>Create Post</span>
       </Link>
 
       <Link 
@@ -99,7 +100,7 @@ export default function Sidebar() {
         }}
       >
         <Video size={18} color={pathname === '/live' ? '#1877F2' : '#65676B'} />
-        <span>Live Studio</span>
+        <span>Create Live</span>
       </Link>
 
       <Link 
@@ -118,8 +119,8 @@ export default function Sidebar() {
           fontSize: 14
         }}
       >
-        <Settings size={18} color={pathname === '/settings' ? '#1877F2' : '#65676B'} />
-        <span>BYOK Settings</span>
+        <Key size={18} color={pathname === '/settings' ? '#1877F2' : '#65676B'} />
+        <span>API Setup</span>
       </Link>
 
       {/* Documentation Main Section & Expandable Subtabs */}

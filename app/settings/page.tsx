@@ -107,7 +107,7 @@ export default function SettingsPage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid #E4E6EB' }}>
           <Key size={26} color="#1877F2" />
           <div>
-            <h1 style={{ fontSize: 22, fontWeight: 700, color: '#1877F2' }}>Bring Your Own Key (BYOK) Credentials</h1>
+            <h1 style={{ fontSize: 22, fontWeight: 700, color: '#1877F2' }}>API Setup & Credentials</h1>
             <p style={{ color: '#65676B', fontSize: 14 }}>Select any social platform to configure private API keys & Developer credentials</p>
           </div>
         </div>
