@@ -39,6 +39,13 @@ export default function PostStudioPage() {
     'fb-page-1', 'yt-channel-1', 'ig-account-1'
   ]);
   const [mediaFile, setMediaFile] = useState<File | null>(null);
+
+  React.useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn) {
+      window.location.href = '/login';
+    }
+  }, []);
   
   // Meta Business Suite Features
   const [publishMode, setPublishMode] = useState<PostPublishMode>('IMMEDIATE');

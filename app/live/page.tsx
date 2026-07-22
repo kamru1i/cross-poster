@@ -8,6 +8,13 @@ export default function LiveStudioPage() {
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(['FB_LIVE', 'YT_LIVE']);
   const [isStreaming, setIsStreaming] = useState(false);
 
+  React.useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn) {
+      window.location.href = '/login';
+    }
+  }, []);
+
   const availablePlatforms = [
     { id: 'FB_LIVE', name: 'Facebook Live', color: '#1877F2' },
     { id: 'YT_LIVE', name: 'YouTube Live', color: '#FF0000' },

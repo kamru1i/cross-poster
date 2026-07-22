@@ -1,28 +1,38 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Globe, Video, Settings, UserCheck, Share2, BookOpen, LogOut } from 'lucide-react';
 
 export default function Navbar() {
   const pathname = usePathname();
-  // Mock login state (In production, synced with NextAuth useSession)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // If on login page or not logged in, hide protected studio links
+  useEffect(() => {
+    // Sync with auth status
+    const authState = localStorage.getItem('isLoggedIn') === 'true';
+    setIsLoggedIn(authState);
+  }, [pathname]);
+
   const isLoginPage = pathname === '/login';
   const showProtectedLinks = isLoggedIn && !isLoginPage;
+
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    setIsLoggedIn(false);
+    window.location.href = '/login';
+  };
 
   return (
     <nav className="navbar">
       {/* Left: Brand Logo */}
-      <Link href={showProtectedLinks ? '/' : '/login'} className="brand-title">
+      <Link href={isLoggedIn ? '/' : '/login'} className="brand-title">
         <Share2 size={24} color="#1877F2" />
         <span>Cross Poster</span>
       </Link>
 
-      {/* Center Navigation Links (Hidden on Login Page / Unauthenticated) */}
+      {/* Center Navigation Links (Hidden if unauthenticated or on login page) */}
       {showProtectedLinks ? (
         <div className="nav-links">
           <Link href="/" className={`nav-item ${pathname === '/' ? 'active' : ''}`}>
@@ -57,10 +67,7 @@ export default function Navbar() {
           <button 
             className="btn btn-secondary" 
             style={{ padding: '6px 14px', fontSize: 13 }}
-            onClick={() => {
-              setIsLoggedIn(false);
-              window.location.href = '/login';
-            }}
+            onClick={handleLogout}
           >
             <LogOut size={16} />
             Logout

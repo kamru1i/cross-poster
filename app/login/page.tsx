@@ -10,10 +10,14 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleSuccessfulAuth = () => {
+    localStorage.setItem('isLoggedIn', 'true');
+    window.location.href = '/';
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`${isRegister ? 'Registration' : 'Login'} successful! Redirecting to Post Studio...`);
-    window.location.href = '/';
+    handleSuccessfulAuth();
   };
 
   return (
@@ -47,7 +51,7 @@ export default function LoginPage() {
               padding: '12px 18px',
               fontSize: 15
             }}
-            onClick={() => alert('Redirecting to Facebook Login...')}
+            onClick={handleSuccessfulAuth}
           >
             Continue with Facebook
           </button>
@@ -63,7 +67,7 @@ export default function LoginPage() {
               padding: '12px 18px',
               fontSize: 15
             }}
-            onClick={() => alert('Redirecting to Google Sign-In...')}
+            onClick={handleSuccessfulAuth}
           >
             <span style={{ color: '#4285F4', fontWeight: 700, marginRight: 6 }}>G</span> Continue with Google
           </button>

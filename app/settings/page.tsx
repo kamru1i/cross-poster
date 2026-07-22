@@ -13,6 +13,13 @@ export default function SettingsPage() {
 
   const [isSaved, setIsSaved] = useState(false);
 
+  React.useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn) {
+      window.location.href = '/login';
+    }
+  }, []);
+
   const handleSaveKeys = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaved(true);
